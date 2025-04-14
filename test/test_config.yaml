@@ -1,8 +1,8 @@
 db:
-  host: 10.16.40.210
-  db_name: task_planner_test_db
-  user: luna
-  password: luna
+  host: localhost
+  db_name: test_db
+  user: test
+  password: test
 
 api:
   deadline_interval: 5
