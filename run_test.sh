@@ -13,3 +13,4 @@ docker run \
 --name=task_planner \
 --detach=true \
 task_planner:1.0.0
+

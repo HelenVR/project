@@ -25,3 +25,4 @@ class SearchTaskRequest(BaseModel):
     start_date: Optional[str] = None
     end_date: Optional[str] = None
     done: Optional[str] = None
+

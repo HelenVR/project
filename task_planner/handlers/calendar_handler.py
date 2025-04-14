@@ -26,3 +26,4 @@ async def read_calendar(request: Request, month: int = None, year: int = None):
         "show_calendar.html",
         {"request": request, "days": days, "month_name": month_name, "year": year},
     )
+

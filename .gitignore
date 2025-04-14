@@ -10,6 +10,7 @@ __pycache__
 .DS_Store
 /venv
 **.egg-info/
+.venv
 /.venv
 
 # Test coverage

@@ -417,3 +417,4 @@ async def get_all_tasks(request: Request):
             "show_tasks.html", {"request": request, "error_message": error_message},
             status_code=404
         )
+
