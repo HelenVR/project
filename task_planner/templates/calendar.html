@@ -17,17 +17,14 @@
 
             document.getElementById('calendar').innerHTML = '';
 
-            // Заголовок месяца
             const header = document.createElement('h2');
             header.innerText = date.toLocaleString('default', { month: 'long' }) + ' ' + year;
             document.getElementById('calendar').appendChild(header);
 
-            // Создание таблицы календаря
             const table = document.createElement('table');
             const thead = document.createElement('thead');
             const tbody = document.createElement('tbody');
 
-            // Дни недели
             const daysOfWeek = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
             const headerRow = document.createElement('tr');
             daysOfWeek.forEach(day => {
@@ -36,25 +33,21 @@
                 headerRow.appendChild(th);
             });
             thead.appendChild(headerRow);
-            
-            // Заполнение дней месяца
+
             const firstDayOfMonth = new Date(year, month, 1);
             const lastDayOfMonth = new Date(year, month + 1, 0);
             
             let row = document.createElement('tr');
 
-            // Пустые ячейки до первого дня месяца
             for (let i = 0; i < firstDayOfMonth.getDay(); i++) {
                 row.appendChild(document.createElement('td'));
             }
 
-            // Дни месяца
             for (let day = 1; day <= lastDayOfMonth.getDate(); day++) {
                 const cellDate = new Date(year, month, day);
                 const cell = document.createElement('td');
                 cell.innerText = day;
 
-                // Проверка на наличие задач в этот день
                 tasks.forEach(task => {
                     if (new Date(task.deadline).toDateString() === cellDate.toDateString()) {
                         cell.classList.add('highlight');
@@ -64,7 +57,6 @@
 
                 row.appendChild(cell);
 
-                // Если конец недели - создаем новую строку
                 if (cellDate.getDay() === 6) {
                     tbody.appendChild(row);
                     row = document.createElement('tr');
@@ -78,7 +70,6 @@
             
             document.getElementById('calendar').appendChild(table);
 
-            // Кнопки навигации по месяцам
             const prevButton = document.createElement('button');
             prevButton.innerText = 'Предыдущий месяц';
             prevButton.onclick = () => renderCalendar(monthOffset - 1);
@@ -91,6 +82,6 @@
             document.getElementById('calendar').appendChild(nextButton);
         }
 
-        renderCalendar(0); // Отображаем текущий месяц по умолчанию
+        renderCalendar(0);
     </script>
 {% endblock %}
