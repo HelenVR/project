@@ -1,0 +1,19 @@
+*~
+*.deb
+__pycache__
+/build
+/tmp
+.cache
+.idea
+.pytest_cache
+/dist
+.DS_Store
+/venv
+**.egg-info/
+/.venv
+
+# Test coverage
+.coverage
+coverage.xml
+/htmlcov
+

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Добавить новую задачу</h1>
+{% if message %}
+    <p class="success-message">{{ message }}</p>
+
+{% elif error_message %}
+    <p class="error-message">{{ error_message }}</p>
+{% else %}
+<form action="/add_task" method="post">
+    <label for="name">Имя задачи:</label><br>
+    <input type="text" id="name" name="name" required>
+
+    <label for="comment">Комментарий:</label><br>
+    <input type="text" id="comment" name="comment">
+    <h2>Выполнить задачу до</h2>
+    <label for="year">Год:</label>
+    <select id="year" name="year" required>
+        {% for year in range(2025, 2031) %}
+            <option value="{{ year }}">{{ year }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="month">Месяц:</label>
+    <select id="month" name="month" required>
+        {% for month in range(1, 13) %}
+            <option value="{{ month }}">{{ month }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="day">День:</label>
+    <select id="day" name="day" required>
+        {% for day in range(1, 32) %}
+            <option value="{{ day }}">{{ day }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">"Добавить задачу"</button>
+</form>
+{% endif %}
+{% endblock %}

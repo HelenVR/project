@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="calendar-title">Календарь на {{ year }} год</h2><br>
+    <div class="month-buttons">
+        <div class="month-button">
+            <button onclick="location.href='{{ url_for('read_calendar', year=year, month=1) }}'">Январь</button>
+        </div>
+        <div class="month-button">
+            <button onclick="location.href='{{ url_for('read_calendar', year=year, month=2) }}'">Февраль</button>
+        </div>
+        <div class="month-button">
+            <button onclick="location.href='{{ url_for('read_calendar', year=year, month=3) }}'">Март</button>
+        </div>
+        <div class="month-button">
+            <button onclick="location.href='{{ url_for('read_calendar', year=year, month=4) }}'">Апрель</button>
+        </div>
+        <div class="month-button">
+            <button onclick="location.href='{{ url_for('read_calendar', year=year, month=5) }}'">Май</button>
+        </div>
+        <div class="month-button">
+            <button onclick="location.href='{{ url_for('read_calendar', year=year, month=6) }}'">Июнь</button>
+        </div>
+        <div class="month-button">
+            <button onclick="location.href='{{ url_for('read_calendar', year=year, month=7) }}'">Июль</button>
+        </div>
+        <div class="month-button">
+            <button onclick="location.href='{{ url_for('read_calendar', year=year, month=8) }}'">Август</button>
+        </div>
+        <div class="month-button">
+            <button onclick="location.href='{{ url_for('read_calendar', year=year, month=9) }}'">Сентябрь</button>
+        </div>
+        <div class="month-button">
+            <button onclick="location.href='{{ url_for('read_calendar', year=year, month=10) }}'">Октябрь</button>
+        </div>
+        <div class="month-button">
+            <button onclick="location.href='{{ url_for('read_calendar', year=year, month=11) }}'">Ноябрь</button>
+        </div>
+        <div class="month-button">
+            <button onclick="location.href='{{ url_for('read_calendar', year=year, month=12) }}'">Декабрь</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ month_name }} {{ year }}</h1>
+<div class="calendar">
+    {% for day, tasks in days.items() %}
+        <div class="day">
+            {% if tasks %}
+                <a href="{{ url_for('show_tasks', date=day) }}" class="task-link">{{ day.split('-')[-1] }}</a>
+            {% else %}
+                {{ day.split("-")[-1] }}
+            {% endif %}
+        </div>
+    {% endfor %}
+</div><br>
+<footer>
+    <a href="{{ url_for('year_calendar') }}" class="button">Назад к календарю</a>
+</footer>
+{% endblock %}

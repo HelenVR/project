@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Список доступных файлов{% endblock %}
+
+{% block content %}
+<h1>Список доступных файлов</h1>
+
+{% if tasks %}
+    <ul class="file-list">
+        {% for task in tasks %}
+            <li>
+                <a href="{{ url_for('show_task', task_id=task.id) }}">{{ task.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p class="error-message">Нет доступных файлов для скачивания.</p>
+{% endif %}
+{% endblock %}

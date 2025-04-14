@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Календарь задач{% endblock %}
+
+{% block content %}
+    <h1>Календарь задач</h1>
+    <div id="calendar"></div>
+
+    <script>
+        const tasks = {{ tasks | tojson }};
+        const currentDate = new Date();
+        
+        function renderCalendar(monthOffset) {
+            const date = new Date(currentDate.getFullYear(), currentDate.getMonth() + monthOffset);
+            const month = date.getMonth();
+            const year = date.getFullYear();
+
+            document.getElementById('calendar').innerHTML = '';
+
+            // Заголовок месяца
+            const header = document.createElement('h2');
+            header.innerText = date.toLocaleString('default', { month: 'long' }) + ' ' + year;
+            document.getElementById('calendar').appendChild(header);
+
+            // Создание таблицы календаря
+            const table = document.createElement('table');
+            const thead = document.createElement('thead');
+            const tbody = document.createElement('tbody');
+
+            // Дни недели
+            const daysOfWeek = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+            const headerRow = document.createElement('tr');
+            daysOfWeek.forEach(day => {
+                const th = document.createElement('th');
+                th.innerText = day;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            
+            // Заполнение дней месяца
+            const firstDayOfMonth = new Date(year, month, 1);
+            const lastDayOfMonth = new Date(year, month + 1, 0);
+            
+            let row = document.createElement('tr');
+
+            // Пустые ячейки до первого дня месяца
+            for (let i = 0; i < firstDayOfMonth.getDay(); i++) {
+                row.appendChild(document.createElement('td'));
+            }
+
+            // Дни месяца
+            for (let day = 1; day <= lastDayOfMonth.getDate(); day++) {
+                const cellDate = new Date(year, month, day);
+                const cell = document.createElement('td');
+                cell.innerText = day;
+
+                // Проверка на наличие задач в этот день
+                tasks.forEach(task => {
+                    if (new Date(task.deadline).toDateString() === cellDate.toDateString()) {
+                        cell.classList.add('highlight');
+                        cell.innerHTML += `<br><a href="/task/${task.id}">${task.name}</a>`;
+                    }
+                });
+
+                row.appendChild(cell);
+
+                // Если конец недели - создаем новую строку
+                if (cellDate.getDay() === 6) {
+                    tbody.appendChild(row);
+                    row = document.createElement('tr');
+                }
+            }
+
+            tbody.appendChild(row);
+            
+            table.appendChild(thead);
+            table.appendChild(tbody);
+            
+            document.getElementById('calendar').appendChild(table);
+
+            // Кнопки навигации по месяцам
+            const prevButton = document.createElement('button');
+            prevButton.innerText = 'Предыдущий месяц';
+            prevButton.onclick = () => renderCalendar(monthOffset - 1);
+            
+            const nextButton = document.createElement('button');
+            nextButton.innerText = 'Следующий месяц';
+            nextButton.onclick = () => renderCalendar(monthOffset + 1);
+
+            document.getElementById('calendar').appendChild(prevButton);
+            document.getElementById('calendar').appendChild(nextButton);
+        }
+
+        renderCalendar(0); // Отображаем текущий месяц по умолчанию
+    </script>
+{% endblock %}

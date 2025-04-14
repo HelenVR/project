@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Скачать файл с задачами</h1>
+
+{% if error_message %}
+    <p class="error-message">{{ error_message }}</p>
+{% else %}
+    <div>Скачать файл</div>
+    <a href="{{ url_for('download') }}">Скачать файл</a>
+{% endif %}
+{% endblock %}

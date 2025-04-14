@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Обновить задачу</h1>
+{% if error_message %}
+    <p class="error-message">{{ error_message }}</p>
+{% else %}
+<form action="/update_task" method="post">
+    <label for="name">Имя задачи (изменить нельзя):</label><br>
+    <input type="text" id="name" name="name" required>
+
+    <label for="comment">Новый комментарий:</label><br>
+    <input type="text" id="comment" name="comment">
+
+    <div style="display: inline-block; text-align: center;">
+        <span>Срок выполнения задачи:</span><br>
+        <input type="text" id="year" name="year" maxlength="4" placeholder="ГГГГ" style="width: 70px;" required>
+        -
+        <input type="text" id="month" name="month" maxlength="2" placeholder="ММ" style="width: 50px;" required>
+        -
+        <input type="text" id="day" name="day" maxlength="2" placeholder="ДД" style="width: 50px;" required><br>
+
+        <span>Новое время выполнение задачи (необязательно):</span><br>
+        <input type="text" id="new_year" name="new_year" maxlength="4" placeholder="ГГГГ" style="width: 70px;">
+        -
+        <input type="text" id="new_month" name="new_month" maxlength="2" placeholder="ММ" style="width: 50px;">
+        -
+        <input type="text" id="new_day" name="new_day" maxlength="2" placeholder="ДД" style="width: 50px;">
+    </div>
+
+        <p style='font-size: small; color: gray;'>Формат даты: ГГГГ-ММ-ДД</p>
+
+    <label>Задача выполнена?</label>
+    <input type="radio" id="done_yes" name="done" value="True">
+    <label for="done_yes">Да</label>
+    <input type="radio" id="done_no" name="done" value="False">
+    <label for="done_no">Нет</label>
+
+    <button type="submit">Обновить задачу</button>
+</form>
+{% endif %}
+{% endblock %}

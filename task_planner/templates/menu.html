@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Планировщик задач</h1>
+    <ul>
+        <li><a href="{{ url_for('search_task_page') }}">Найти задачу</a></li>
+        <li><a href="{{ url_for('add_task_page') }}">Добавить задачу</a></li>
+        <li><a href="{{ url_for('get_all_tasks') }}">Показать все задачи</a></li>
+        <li><a href="{{ url_for('update_task') }}">Обновить задачу</a></li>
+        <li><a href="{{ url_for('delete_task') }}">Удалить задачу</a></li>
+        <li><a href="{{ url_for('year_calendar') }}">Календарь</a></li>
+        <li><a href="{{ url_for('download') }}">Скачать задачи</a></li>
+    </ul>
+</body>
+</html>

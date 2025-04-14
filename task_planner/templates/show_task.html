@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Детали задачи{% endblock %}
+
+{% block content %}
+<div class="task-container">
+    <h2>Детали задачи</h2>
+
+    {% if message %}
+        <div class=".success-message">
+            {{ message }}
+        </div>
+    {% endif %}
+
+    <div class="task-card">
+        <h3>{{ task.name }}</h3>
+        <p><strong>Название:</strong> {{ task.name }}</p>
+        <p><strong>Срок выполнения:</strong> {{ task.deadline.strftime('%Y-%m-%d') }}</p>
+        <p><strong>Комментарий:</strong> {{ task.comment }}</p>
+        <p><strong>Статус:</strong> {{ "Выполнено" if task.done else "Не выполнено" }}</p>
+    </div>
+</div>
+{% endblock %}

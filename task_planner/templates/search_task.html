@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Найти задачи</h1>
+{% if task_id %}
+    <a href="{{ url_for('show_task', task_id=task_id) }}">Посмотреть задачу</a>
+
+{% elif error_message %}
+    <p class="error-message">{{ error_message }}</p>
+{% else %}
+<form action="/search_task" method="post">
+    <label for="name">Имя задачи:</label><br>
+    <input type="text" id="name" name="name">
+
+    <label for="comment">Комментарий:</label><br>
+    <input type="text" id="comment" name="comment">
+
+     <div>
+            <span>Выберите дату поиска с:</span><br>
+            <input type="text" id="start_year" name="start_year" maxlength="4" placeholder="ГГГГ" style="width: 70px;">
+            -
+            <input type="text" id="start_month" name="start_month" maxlength="2" placeholder="ММ" style="width: 50px;">
+            -
+            <input type="text" id="start_day" name="start_day" maxlength="2" placeholder="ДД" style="width: 50px;"><br>
+
+            <span>по:</span><br>
+            <input type="text" id="end_year" name="end_year" maxlength="4" placeholder="ГГГГ" style="width: 70px;">
+            -
+            <input type="text" id="end_month" name="end_month" maxlength="2" placeholder="ММ" style="width: 50px;">
+            -
+            <input type="text" id="end_day" name="end_day" maxlength="2" placeholder="ДД" style="width: 50px;">
+        </div>
+
+        <p style='font-size: small; color: gray;'>Формат даты: ГГГГ-ММ-ДД</p>
+
+    <label>Задача выполнена?</label>
+    <input type="radio" id="done_yes" name="done" value="True">
+    <label for="done_yes">Да</label>
+    <input type="radio" id="done_no" name="done" value="False">
+    <label for="done_no">Нет</label>
+
+    <button type="submit">Найти задачу</button>
+</form>
+{% endif %}
+{% endblock %}

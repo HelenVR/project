@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 style="text-align: center;">Удалить задачу</h1>  <!-- Центрируем заголовок -->
+{% if error_message %}
+    <p class="error-message">{{ error_message }}</p>
+{% elif message %}
+    <p class="success-message">{{ message }}</p>
+{% else %}
+<form action="/delete_task" method="post">
+    <label for="name">Имя задачи (обязательно, если хотите удалить конкретную задачу):</label><br>
+    <input type="text" id="name" name="name" style="width: 100%; max-width: 400px; margin-bottom: 20px;">  <!-- Ширина поля ввода -->
+
+    <div style="text-align: center;">
+        <span style="margin-bottom: 20px;">Срок выполнения задачи (обязательно, если хотите удалить конкретную задачу):</span><br>
+        <input type="text" id="year" name="year" maxlength="4" placeholder="ГГГГ" style="width: 70px;">
+        -
+        <input type="text" id="month" name="month" maxlength="2" placeholder="ММ" style="width: 50px;">
+        -
+        <input type="text" id="day" name="day" maxlength="2" placeholder="ДД" style="width: 50px;"><br>
+    </div>
+
+    <p style='font-size: small; color: gray; text-align: center;'>Формат даты: ГГГГ-ММ-ДД</p>  <!-- Центрируем текст с форматом даты -->
+
+    <div style="text-align: center;">  <!-- Центрируем радио-кнопки -->
+        <label>Удалить все выполненные задачи?</label><br>
+        <input type="radio" id="done_yes" name="done" value="True">
+        <label for="done_yes">Да</label>
+        <input type="radio" id="done_no" name="done" value="False">
+        <label for="done_no">Нет</label>
+    </div>
+
+    <div style="text-align: center;">  <!-- Центрируем кнопку -->
+        <button type="submit">Удалить задачу</button>
+    </div>
+</form>
+{% endif %}
+{% endblock %}
