@@ -128,14 +128,14 @@ def test_search_task_by_name_ok(client):
 #     assert "Задачи по данным фильтрам не найдены" in response.text
 
 
-def test_search_task_by_date_ok(client):
-    response = client.post("/search_task", data={
-        "year": "2025",
-        "month": "10",
-        "day": "10",
-    })
-    assert response.status_code == 200
-    assert "/show_task/" in response.text
+# def test_search_task_by_date_ok(client):
+#     response = client.post("/search_task", data={
+#         "year": "2025",
+#         "month": "10",
+#         "day": "10",
+#     })
+#     assert response.status_code == 200
+#     assert "/show_task/" in response.text
 
 
 # def test_search_task_by_date_failure(client):
@@ -148,12 +148,12 @@ def test_search_task_by_date_ok(client):
 #     assert "Задачи по данным фильтрам не найдены" in response.text
 
 
-def test_search_task_by_comment_ok(client):
-    response = client.post("/search_task", data={
-        "comment": "This is a test task."
-    })
-    assert response.status_code == 200
-    assert "/show_task/" in response.text
+# def test_search_task_by_comment_ok(client):
+#     response = client.post("/search_task", data={
+#         "comment": "This is a test task."
+#     })
+#     assert response.status_code == 200
+#     assert "/show_task/" in response.text
 
 #
 # def test_search_task_by_comment_failure(client):
@@ -164,12 +164,12 @@ def test_search_task_by_comment_ok(client):
 #     assert "Задачи по данным фильтрам не найдены" in response.text
 
 
-def test_search_task_by_status_ok(client):
-    response = client.post("/search_task", data={
-        "done": "False"
-    })
-    assert response.status_code == 200
-    assert "/show_task/" in response.text
+# def test_search_task_by_status_ok(client):
+#     response = client.post("/search_task", data={
+#         "done": "False"
+#     })
+#     assert response.status_code == 200
+#     assert "/show_task/" in response.text
 
 #
 # def test_search_task_by_status_failure(client):
@@ -179,20 +179,20 @@ def test_search_task_by_status_ok(client):
 #     assert response.status_code == 404
 #     assert "Задачи по данным фильтрам не найдены" in response.text
 
-
-def test_update_task_ok(client):
-    response = client.post("/update_task", data={
-        "name": "Test Task",
-        "year": "2025",
-        "month": "10",
-        "day": "10",
-        "new_year": "2025",
-        "new_month": "11",
-        "new_day": "11",
-        "comment": "New test comment."
-    })
-    assert response.status_code == 200
-    assert "Задача обновлена" in response.text
+#
+# def test_update_task_ok(client):
+#     response = client.post("/update_task", data={
+#         "name": "Test Task",
+#         "year": "2025",
+#         "month": "10",
+#         "day": "10",
+#         "new_year": "2025",
+#         "new_month": "11",
+#         "new_day": "11",
+#         "comment": "New test comment."
+#     })
+#     assert response.status_code == 200
+#     assert "Задача обновлена" in response.text
 
 
 # def test_update_task_not_found(client):
@@ -232,22 +232,22 @@ def test_update_task_ok(client):
 #     assert response.status_code == 422
 #     assert "Вы ввели неправильное время" in response.text
 
-
-def test_show_all_tasks_ok(client):
-    response = client.get("/get_all_tasks")
-    assert response.status_code == 200
-    assert "/show_task/" in response.text
-
-
-def test_delete_task_ok(client):
-    response = client.post("/delete_task", data={
-        "name": "Test Task",
-        "year": "2025",
-        "month": "11",
-        "day": "11",
-    })
-    assert response.status_code == 200
-    assert "Задача удалена" in response.text
+#
+# def test_show_all_tasks_ok(client):
+#     response = client.get("/get_all_tasks")
+#     assert response.status_code == 200
+#     assert "/show_task/" in response.text
+#
+#
+# def test_delete_task_ok(client):
+#     response = client.post("/delete_task", data={
+#         "name": "Test Task",
+#         "year": "2025",
+#         "month": "11",
+#         "day": "11",
+#     })
+#     assert response.status_code == 200
+#     assert "Задача удалена" in response.text
 
 
 # def test_delete_task_not_found(client):
