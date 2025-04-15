@@ -8,12 +8,11 @@ from fastapi.testclient import TestClient
 from task_planner.configs.config import load_config
 from task_planner.main import app
 
-
-@pytest.fixture(scope="session", autouse=True)
-def set_test_config():
-    os.environ["CONFIG_FILE"] = "/home/helen/PycharmProjects/tasks_planner/test/test_config.yaml"
-    yield
-    del os.environ["CONFIG_FILE"]
+# @pytest.fixture(scope="session", autouse=True)
+# def set_test_config():
+#     os.environ["CONFIG_FILE"] = "/home/helen/PycharmProjects/tasks_planner/test/test_config.yaml"
+#     yield
+#     del os.environ["CONFIG_FILE"]
 
 
 @pytest.fixture(scope="session")
