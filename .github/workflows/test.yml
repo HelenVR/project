@@ -1,0 +1,49 @@
+name: CI Workflow
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: test_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run build script
+        run: |
+          sh build.sh
+
+      - name: Run Docker container
+        run: |
+          sh run_test.sh
+
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          until pg_isready -h localhost -U test; do sleep 1; done
+
+      - name: Run tests
+        run: |
+          docker exec my-app-container pytest task_planner/tests
+
+      - name: Clean up containers
+        if: always()
+        run: |
+          docker rm -f my-app-container || true
