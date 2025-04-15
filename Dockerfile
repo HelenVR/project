@@ -15,17 +15,7 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-interaction --no-root --only main
 
-RUN apt-get update && \
-    apt-get install -y curl \
-    traceroute \
-    mc \
-    tcpdump \
-    telnet \
-    dnsutils \
-    iputils-ping \
-    && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean autoclean && apt-get autoremove --yes && rm -rf /var/lib/{apt,dpkg,cache,log}
-
 ENV APP_PORT=5200
+ENV APP_HOST=0.0.0.0
 EXPOSE ${APP_PORT}
-CMD ["python", "-m", "task_planner/main.py"]
+CMD ["sh", "-c", "uvicorn task_planner.main:app --host $APP_HOST --port $APP_PORT"]
