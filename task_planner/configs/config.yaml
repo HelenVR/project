@@ -3,6 +3,3 @@ db:
   db_name: task_planner
   user: luna
   password: luna
-
-api:
-  deadline_interval: 5
