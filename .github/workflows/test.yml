@@ -39,9 +39,10 @@ jobs:
         run: |
           until pg_isready -h localhost -U test; do sleep 1; done
 
-      - name: Run tests
+      - name: Run tests with memory limit
         run: |
-          docker exec task_planner pytest /usr/task_planner/test
+          ulimit -v 2000000 
+          pytest /usr/task_planner/test
 
       - name: Clean up containers
         if: always()
