@@ -2,14 +2,9 @@ import pytest
 import os
 
 from fastapi.testclient import TestClient
-from task_planner.configs.config import load_config
-from task_planner.main import app
+from ..configs.config import load_config
+from ..main import app
 
-#
-# @pytest.fixture(scope="session", autouse=True)
-# def setup_database():
-#     yield
-#     app.state.db_worker.delete_db()
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_config():
