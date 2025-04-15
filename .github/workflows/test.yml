@@ -39,13 +39,9 @@ jobs:
         run: |
           until pg_isready -h localhost -U test; do sleep 1; done
 
-      - name: Run success tests
+      - name: Run tests
         run: |
-          docker exec task_planner pytest -m success /usr/task_planner/test
-
-      - name: Run failure tests
-        run: |
-          docker exec task_planner pytest -m failure /usr/task_planner/test
+          docker exec task_planner pytest /usr/task_planner/test
 
       - name: Clean up containers
         if: always()

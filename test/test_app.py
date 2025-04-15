@@ -24,7 +24,6 @@ def client():
         yield test_client
 
 
-@pytest.mark.success
 def test_read_root(client):
     response = client.get("/")
     assert response.status_code == 200
@@ -50,7 +49,6 @@ def test_read_root(client):
 #     assert "Вы ввели неправильное начальное время поиска" in response.text
 
 
-@pytest.mark.failure
 def test_search_task_wrong_end_date(client):
     response = client.post("/search_task", data={
         "name": "Test Task 2",
@@ -63,14 +61,12 @@ def test_search_task_wrong_end_date(client):
     assert "Вы ввели неправильное начальное время поиска" in response.text
 
 
-@pytest.mark.success
 def test_show_all_tasks_no_tasks(client):
     response = client.get("/get_all_tasks")
     assert response.status_code == 404
     assert "/show_task/" not in response.text
 
 
-@pytest.mark.success
 def test_add_task_ok(client):
     response = client.post("/add_task", data={
         "name": "Test Task",
@@ -84,7 +80,6 @@ def test_add_task_ok(client):
     assert "Задача добавлена" in response.text
 
 
-@pytest.mark.success
 def test_add_task_existing(client):
     response = client.post("/add_task", data={
         "name": "Test Task",
@@ -97,7 +92,6 @@ def test_add_task_existing(client):
     assert "Задача с таким названием и сроком выполнения уже существует" in response.text
 
 
-@pytest.mark.failure
 def test_add_task_wrong_date(client):
     response = client.post("/add_task", data={
         "name": "Test Task",
@@ -110,7 +104,6 @@ def test_add_task_wrong_date(client):
     assert "Вы ввели неправильное время" in response.text
 
 
-@pytest.mark.failure
 def test_add_task_past_date(client):
     response = client.post("/add_task", data={
         "name": "Test Task",
@@ -123,7 +116,6 @@ def test_add_task_past_date(client):
     assert "Введите другое значение для времени выполнения задачи" in response.text
 
 
-@pytest.mark.success
 def test_search_task_by_name_ok(client):
     response = client.post("/search_task", data={
         "name": "Test Task",
@@ -132,7 +124,6 @@ def test_search_task_by_name_ok(client):
     assert "/show_task/" in response.text
 
 
-@pytest.mark.failure
 def test_search_task_by_name_failure(client):
     response = client.post("/search_task", data={
         "name": "Test2",
@@ -141,7 +132,6 @@ def test_search_task_by_name_failure(client):
     assert "Задачи по данным фильтрам не найдены" in response.text
 
 
-@pytest.mark.success
 def test_search_task_by_date_ok(client):
     response = client.post("/search_task", data={
         "year": "2025",
@@ -152,7 +142,6 @@ def test_search_task_by_date_ok(client):
     assert "/show_task/" in response.text
 
 
-# @pytest.mark.failure
 # def test_search_task_by_date_failure(client):
 #     response = client.post("/search_task", data={
 #         "end_year": "2025",
@@ -163,7 +152,6 @@ def test_search_task_by_date_ok(client):
 #     assert "Задачи по данным фильтрам не найдены" in response.text
 
 
-@pytest.mark.success
 def test_search_task_by_comment_ok(client):
     response = client.post("/search_task", data={
         "comment": "This is a test task."
@@ -172,7 +160,6 @@ def test_search_task_by_comment_ok(client):
     assert "/show_task/" in response.text
 
 #
-# @pytest.mark.failure
 # def test_search_task_by_comment_failure(client):
 #     response = client.post("/search_task", data={
 #         "comment": "1111111"
@@ -181,7 +168,6 @@ def test_search_task_by_comment_ok(client):
 #     assert "Задачи по данным фильтрам не найдены" in response.text
 
 
-@pytest.mark.success
 def test_search_task_by_status_ok(client):
     response = client.post("/search_task", data={
         "done": "False"
@@ -190,7 +176,6 @@ def test_search_task_by_status_ok(client):
     assert "/show_task/" in response.text
 
 #
-# @pytest.mark.failure
 # def test_search_task_by_status_failure(client):
 #     response = client.post("/search_task", data={
 #         "done": "True"
@@ -199,7 +184,6 @@ def test_search_task_by_status_ok(client):
 #     assert "Задачи по данным фильтрам не найдены" in response.text
 
 
-@pytest.mark.success
 def test_update_task_ok(client):
     response = client.post("/update_task", data={
         "name": "Test Task",
@@ -215,7 +199,6 @@ def test_update_task_ok(client):
     assert "Задача обновлена" in response.text
 
 
-@pytest.mark.failure
 def test_update_task_not_found(client):
     response = client.post("/update_task", data={
         "name": "Test2",
@@ -228,7 +211,6 @@ def test_update_task_not_found(client):
     assert "не найдена" in response.text
 
 #
-# @pytest.mark.failure
 # def test_update_task_past_date(client):
 #     response = client.post("/update_task", data={
 #         "name": "Test Task",
@@ -243,7 +225,6 @@ def test_update_task_not_found(client):
 #     assert "Введите другое значение для времени выполнения задачи" in response.text
 
 
-@pytest.mark.failure
 def test_update_task_wrong_date(client):
     response = client.post("/update_task", data={
         "name": "Test Task",
@@ -256,14 +237,12 @@ def test_update_task_wrong_date(client):
     assert "Вы ввели неправильное время" in response.text
 
 
-@pytest.mark.success
 def test_show_all_tasks_ok(client):
     response = client.get("/get_all_tasks")
     assert response.status_code == 200
     assert "/show_task/" in response.text
 
 
-@pytest.mark.success
 def test_delete_task_ok(client):
     response = client.post("/delete_task", data={
         "name": "Test Task",
@@ -275,7 +254,6 @@ def test_delete_task_ok(client):
     assert "Задача удалена" in response.text
 
 
-@pytest.mark.failure
 def test_delete_task_not_found(client):
     response = client.post("/delete_task", data={
         "name": "Test Task",
@@ -287,7 +265,6 @@ def test_delete_task_not_found(client):
     assert "не найдена" in response.text
 
 
-@pytest.mark.failure
 def test_delete_task_bad_request(client):
     response = client.post("/delete_task", data={
         "name": "Test Task",
