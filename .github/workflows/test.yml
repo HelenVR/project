@@ -41,9 +41,9 @@ jobs:
 
       - name: Run tests
         run: |
-          docker exec my-app-container pytest task_planner/tests
+          docker exec task_planner pytest task_planner/tests
 
       - name: Clean up containers
         if: always()
         run: |
-          docker rm -f my-app-container || true
+          docker rm -f task_planner || true
