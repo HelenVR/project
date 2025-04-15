@@ -1,9 +1,12 @@
 import pytest
 import os
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from fastapi.testclient import TestClient
-from ..configs.config import load_config
-from ..main import app
+from task_planner.configs.config import load_config
+from task_planner.main import app
 
 
 @pytest.fixture(scope="session", autouse=True)
