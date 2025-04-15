@@ -41,11 +41,11 @@ jobs:
 
       - name: Run success tests
         run: |
-          docker exec task_planner -m success pytest /usr/task_planner/test
+          docker exec task_planner pytest -m success /usr/task_planner/test
 
       - name: Run failure tests
         run: |
-          docker exec task_planner -m failure pytest /usr/task_planner/test
+          docker exec task_planner pytest -m failure /usr/task_planner/test
 
       - name: Clean up containers
         if: always()
