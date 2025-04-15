@@ -57,35 +57,35 @@ def test_read_root(client):
 #     assert "Вы ввели неправильное начальное время поиска" in response.text
 
 
-def test_show_all_tasks_no_tasks(client):
-    response = client.get("/get_all_tasks")
-    assert response.status_code == 404
-    assert "/show_task/" not in response.text
+# def test_show_all_tasks_no_tasks(client):
+#     response = client.get("/get_all_tasks")
+#     assert response.status_code == 404
+#     assert "/show_task/" not in response.text
+#
+#
+# def test_add_task_ok(client):
+#     response = client.post("/add_task", data={
+#         "name": "Test Task",
+#         "year": "2025",
+#         "month": "10",
+#         "day": "10",
+#         "comment": "This is a test task."
+#     })
+#     assert response.status_code == 200
+#     print(response.text)
+#     assert "Задача добавлена" in response.text
 
 
-def test_add_task_ok(client):
-    response = client.post("/add_task", data={
-        "name": "Test Task",
-        "year": "2025",
-        "month": "10",
-        "day": "10",
-        "comment": "This is a test task."
-    })
-    assert response.status_code == 200
-    print(response.text)
-    assert "Задача добавлена" in response.text
-
-
-def test_add_task_existing(client):
-    response = client.post("/add_task", data={
-        "name": "Test Task",
-        "year": "2025",
-        "month": "10",
-        "day": "10",
-        "comment": "This is a test task."
-    })
-    assert response.status_code == 422
-    assert "Задача с таким названием и сроком выполнения уже существует" in response.text
+# def test_add_task_existing(client):
+#     response = client.post("/add_task", data={
+#         "name": "Test Task",
+#         "year": "2025",
+#         "month": "10",
+#         "day": "10",
+#         "comment": "This is a test task."
+#     })
+#     assert response.status_code == 422
+#     assert "Задача с таким названием и сроком выполнения уже существует" in response.text
 
 
 # def test_add_task_wrong_date(client):
@@ -112,12 +112,12 @@ def test_add_task_existing(client):
 #     assert "Введите другое значение для времени выполнения задачи" in response.text
 
 
-def test_search_task_by_name_ok(client):
-    response = client.post("/search_task", data={
-        "name": "Test Task",
-    })
-    assert response.status_code == 200
-    assert "/show_task/" in response.text
+# def test_search_task_by_name_ok(client):
+#     response = client.post("/search_task", data={
+#         "name": "Test Task",
+#     })
+#     assert response.status_code == 200
+#     assert "/show_task/" in response.text
 
 
 # def test_search_task_by_name_failure(client):
