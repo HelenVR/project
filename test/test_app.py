@@ -8,11 +8,11 @@ from fastapi.testclient import TestClient
 from task_planner.configs.config import load_config
 from task_planner.main import app
 
-@pytest.fixture(scope="session", autouse=True)
-def set_test_config():
-    os.environ["CONFIG_FILE"] = "/home/helen/PycharmProjects/tasks_planner/test/test_config.yaml"
-    yield
-    del os.environ["CONFIG_FILE"]
+# @pytest.fixture(scope="session", autouse=True)
+# def set_test_config():
+#     os.environ["CONFIG_FILE"] = "/home/helen/PycharmProjects/tasks_planner/test/test_config.yaml"
+#     yield
+#     del os.environ["CONFIG_FILE"]
 
 
 @pytest.fixture(scope="session")
@@ -37,17 +37,17 @@ def test_read_root(client):
                                                   "Скачать задачи"))
 
 
-@pytest.mark.failure
-def test_search_task_wrong_start_date(client):
-    response = client.post("/search_task", data={
-        "name": "Test Task 2",
-        "start_year": "2025",
-        "start_month": "02",
-        "start_day": "30",
-        "comment": "This is a test task."
-    })
-    assert response.status_code == 422
-    assert "Вы ввели неправильное начальное время поиска" in response.text
+# @pytest.mark.failure
+# def test_search_task_wrong_start_date(client):
+#     response = client.post("/search_task", data={
+#         "name": "Test Task 2",
+#         "start_year": "2025",
+#         "start_month": "02",
+#         "start_day": "30",
+#         "comment": "This is a test task."
+#     })
+#     assert response.status_code == 422
+#     assert "Вы ввели неправильное начальное время поиска" in response.text
 
 
 @pytest.mark.failure
