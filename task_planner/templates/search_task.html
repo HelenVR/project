@@ -9,12 +9,10 @@
     <p class="error-message">{{ error_message }}</p>
 {% else %}
 <form action="/search_task" method="post">
-    <label for="name">Имя задачи:</label><br>
+    <label for="name">Имя задачи:</label>
     <input type="text" id="name" name="name">
-
-    <label for="comment">Комментарий:</label><br>
+    <label for="comment">Комментарий:</label>
     <input type="text" id="comment" name="comment">
-
      <div>
             <span>Выберите дату поиска с:</span><br>
             <input type="text" id="start_year" name="start_year" maxlength="4" placeholder="ГГГГ" style="width: 70px;">
