@@ -13,6 +13,7 @@ from ..application.exceptions import (
     NotFullDataError,
 )
 from ..application.utils import get_deadline
+from ..application.benchmarking import measure_time
 
 router = APIRouter(responses={404: {"description": "Not found"}}, tags=["tasks"])
 
@@ -39,6 +40,7 @@ async def add_task_page(request: Request):
 
 
 @router.post("/add_task", response_class=HTMLResponse)
+@measure_time
 async def add_task(
     request: Request,
     name: str = Form(...),
@@ -125,6 +127,7 @@ async def show_task(request: Request, task_id: int):
 
 
 @router.post("/search_task", response_class=HTMLResponse)
+@measure_time
 async def search_task(
     request: Request,
     name: str | None = Form(None),
@@ -251,6 +254,7 @@ async def update_task(request: Request):
 
 
 @router.post("/update_task", response_class=HTMLResponse)
+@measure_time
 async def update_task(
     request: Request,
     name: str = Form(None),
@@ -321,6 +325,7 @@ async def delete_task(request: Request):
 
 
 @router.post("/delete_task")
+@measure_time
 async def delete_task(
     request: Request,
     name: str | None = Form(None),

@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+import sys
 from loguru import logger
 
 from .configs.config import load_config
@@ -15,6 +16,10 @@ from .workers.db_worker import DBWorker
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    logger.remove()
+    debug_flag = os.getenv('DEBUG', '').lower() in ('true', '1', 'yes')
+    log_level = 'DEBUG' if debug_flag else 'INFO'
+    logger.add(sys.stdout, level=log_level)
     app.mount("/static", StaticFiles(directory=os.getenv("STATIC_DIR", "/home/helen/PycharmProjects/tasks_planner/task_planner/static")), name="static")
     app.state.templates = Jinja2Templates(directory=os.getenv("TEMPLATES_DIR", "/home/helen/PycharmProjects/tasks_planner/task_planner/templates"))
     app.state.config = load_config()
