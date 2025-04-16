@@ -20,8 +20,8 @@ async def lifespan(app: FastAPI):
     debug_flag = os.getenv('DEBUG', '').lower() in ('true', '1', 'yes')
     log_level = 'DEBUG' if debug_flag else 'INFO'
     logger.add(sys.stdout, level=log_level)
-    app.mount("/static", StaticFiles(directory=os.getenv("STATIC_DIR", "/home/helen/PycharmProjects/tasks_planner/task_planner/static")), name="static")
-    app.state.templates = Jinja2Templates(directory=os.getenv("TEMPLATES_DIR", "/home/helen/PycharmProjects/tasks_planner/task_planner/templates"))
+    app.mount("/static", StaticFiles(directory=os.getenv("STATIC_DIR", "task_planner/static")), name="static")
+    app.state.templates = Jinja2Templates(directory=os.getenv("TEMPLATES_DIR", "task_planner/templates"))
     app.state.config = load_config()
     for handler in (tasks_handler, calendar_handler):
         app.include_router(handler.router)
@@ -38,7 +38,7 @@ app = FastAPI(lifespan=lifespan)
 
 if __name__ == '__main__':
     try:
-        uvicorn.run("main:app", host=os.getenv("APP_HOST", "127.0.0.1"), port=int(os.getenv("APP_PORT", "6001")))
+        uvicorn.run("main:app", host=os.getenv("APP_HOST", "127.0.0.1"), port=int(os.getenv("APP_PORT", "6000")))
     except KeyboardInterrupt:
         logger.info('Application is closed')
 
