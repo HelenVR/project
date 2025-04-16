@@ -232,7 +232,6 @@ async def download(request: Request):
                     task.name,
                     task.deadline.strftime("%Y-%m-%d"),
                     task.comment,
-                    task.notification,
                     "Да" if task.done else "Нет",
                 ]
             )
