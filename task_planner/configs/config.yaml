@@ -1,5 +1,5 @@
 db:
-  host: 10.16.40.210
+  host: localhost #10.16.40.210
   db_name: task_planner
-  user: luna
-  password: luna
+  user: task_planner #luna
+  password: task_planner #luna
