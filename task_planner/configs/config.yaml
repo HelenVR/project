@@ -1,5 +1,9 @@
 db:
-  host: localhost #10.16.40.210
+  host: localhost
   db_name: task_planner
-  user: task_planner #luna
-  password: task_planner #luna
+  user: task_planner
+  password: task_planner
+
+api:
+  login: test
+  password: test

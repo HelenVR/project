@@ -13,8 +13,14 @@ class DB(BaseModel):
     password: str = "luna"
 
 
+class Api(BaseModel):
+    login: str
+    password: str
+
+
 class Config(BaseModel):
     db: DB
+    api: Api
 
 
 def load_config(config_file: str = None):

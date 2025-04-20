@@ -2,9 +2,8 @@ import datetime
 import csv
 import os.path
 from loguru import logger
-from fastapi import APIRouter, Form
+from fastapi import APIRouter, Form, Request
 from fastapi.responses import HTMLResponse, FileResponse
-from fastapi import Request
 
 from ..workers.db_worker import DBWorker
 from ..application.exceptions import (
@@ -421,4 +420,13 @@ async def get_all_tasks(request: Request):
             "show_tasks.html", {"request": request, "error_message": error_message},
             status_code=404
         )
+    except Exception as e:
+        logger.error(f'Failed to get tasks: {e.__class__.__name__}, {e}')
+        error_message = f"Ошибка приложения, не удалось получить задачи"
+        return request.app.state.templates.TemplateResponse(
+            "show_tasks.html", {"request": request, "error_message": error_message},
+            status_code=404
+        )
+
+
 

@@ -1,3 +1,5 @@
+import datetime
+
 from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime, Text, Boolean
 from typing import Optional
@@ -26,3 +28,26 @@ class SearchTaskRequest(BaseModel):
     end_date: Optional[str] = None
     done: Optional[str] = None
 
+
+class TasksCountResponse(BaseModel):
+    tasks_count: int
+
+
+class TaskInfo(BaseModel):
+    id: int
+    name: str
+    deadline: datetime.datetime
+    comment: str
+    done: bool
+
+    class Config:
+        from_attributes = True
+
+
+class TasksInfoResponse(BaseModel):
+    tasks_info: list[TaskInfo]
+
+
+class TaskRequest(BaseModel):
+    task_name: str
+    done: bool | None = False
