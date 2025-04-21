@@ -28,21 +28,30 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run build script
-        run: |
-          sh build.sh
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'  # Укажите нужную версию Python
 
-      - name: Run Docker container
+      - name: Install Poetry
         run: |
-          sh run_test.sh
+          pip install poetry
+
+      - name: Install dependencies
+        run: |
+          poetry install --no-interaction --no-ansi
 
       - name: Wait for PostgreSQL to be ready
         run: |
           until pg_isready -h localhost -U test; do sleep 1; done
 
       - name: Run tests
+        env:
+          CONFIG_FILE: /usr/task_planner/task_planner/test/test_config.yaml
+          STATIC_DIR: /usr/task_planner/task_planner/static
+          TEMPLATES_DIR: /usr/task_planner/task_planner/templates
         run: |
-          docker exec task_planner pytest /usr/task_planner/test
+          poetry run pytest /usr/task_planner/test
 
       - name: Clean up containers
         if: always()
