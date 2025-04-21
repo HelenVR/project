@@ -51,7 +51,7 @@ jobs:
           STATIC_DIR: /usr/task_planner/task_planner/static
           TEMPLATES_DIR: /usr/task_planner/task_planner/templates
         run: |
-          poetry run pytest /usr/task_planner/test
+          poetry run pytest /task_planner/test
 
       - name: Clean up containers
         if: always()
