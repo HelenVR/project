@@ -47,9 +47,9 @@ jobs:
 
       - name: Run tests
         env:
-          CONFIG_FILE: /test/test_config.yaml
-          STATIC_DIR: /static
-          TEMPLATES_DIR: /templates
+          CONFIG_FILE: test/test_config.yaml
+          STATIC_DIR: task_planner/static
+          TEMPLATES_DIR: task_planner/templates
         run: |
           poetry run pytest test
 
