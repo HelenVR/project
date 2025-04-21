@@ -5,4 +5,5 @@ db:
   password: test
 
 api:
-  deadline_interval: 5
+  login: test
+  password: test
