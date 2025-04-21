@@ -15,6 +15,9 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-interaction --no-root --only main
 
+ENV CONFIG_FILE=/usr/task_planner/task_planner/configs/config.yaml
+ENV STATIC_DIR=/usr/task_planner/task_planner/static
+ENV TEMPLATES_DIR=/usr/task_planner/task_planner/templates
 ENV APP_PORT=5200
 ENV APP_HOST=0.0.0.0
 EXPOSE ${APP_PORT}
