@@ -1,6 +1,6 @@
 db:
   host: localhost
-  db_name: test_tasks_db
+  db_name: test
   user: test
   password: test
 
