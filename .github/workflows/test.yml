@@ -47,9 +47,9 @@ jobs:
 
       - name: Run tests
         env:
-          CONFIG_FILE: /usr/task_planner/task_planner/test/test_config.yaml
-          STATIC_DIR: /usr/task_planner/task_planner/static
-          TEMPLATES_DIR: /usr/task_planner/task_planner/templates
+          CONFIG_FILE: /task_planner/test/test_config.yaml
+          STATIC_DIR: /task_planner/static
+          TEMPLATES_DIR: /task_planner/templates
         run: |
           poetry run pytest test
 
