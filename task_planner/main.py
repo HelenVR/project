@@ -20,8 +20,8 @@ async def lifespan(app: FastAPI):
     debug_flag = os.getenv('DEBUG', '').lower() in ('true', '1', 'yes')
     log_level = 'DEBUG' if debug_flag else 'INFO'
     logger.add(sys.stdout, level=log_level)
-    app.mount("/static", StaticFiles(directory=os.getenv("STATIC_DIR", "/task_planner/static")), name="static")
-    app.state.templates = Jinja2Templates(directory=os.getenv("TEMPLATES_DIR", "/tasks_planner/task_planner/templates"))
+    app.mount("/static", StaticFiles(directory=os.getenv("STATIC_DIR", "task_planner/static")), name="static")
+    app.state.templates = Jinja2Templates(directory=os.getenv("TEMPLATES_DIR", "task_planner/templates"))
     app.state.config = load_config()
     middleware_deps = [Depends(basic_auth(app.state.config.api.login, app.state.config.api.password))]
     for handler in (tasks_handler, calendar_handler):
